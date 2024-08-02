@@ -11,6 +11,7 @@ async function fetchWeather(){
         }
         const data = await response.json();
         outCreator(data);
+        console.log(data)
 
 
     }catch(err){
@@ -24,6 +25,7 @@ fetchBtn.addEventListener('click', fetchWeather)
 
 function outCreator(data){
     const outputBox = document.querySelector('.output-box');
+    outputBox.innerHTML = ''
     outputBox.appendChild(cityN(data));
     outputBox.appendChild(cityTemp(data));
     outputBox.appendChild(weather(data));
@@ -39,19 +41,19 @@ function cityN(data){
 
 function cityTemp(data){
     const temp = document.createElement('p');
-    temp.textContent= `Temp : ${data.temp}`;
+    temp.textContent= `Temp : ${data.main.temp}`;
     return temp;
 }
 
 function weather(data){
     const cityWeather = document.createElement('p');
-    cityWeather.textContent = `Weather : ${data.weather}`;
+    cityWeather.textContent = `Weather : ${data.weather[0].description}`;
     return cityWeather;
 }
 
 function windSpeed(data){
     const speed = document.createElement('p');
-    speed.textContent = `Wind : ${data.speed}`;
+    speed.textContent = `Wind : ${data.wind.speed}`;
     return speed;
 }
 
